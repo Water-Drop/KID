@@ -21,6 +21,8 @@ class Emulator(object):
         self.analysis_class = TradingAnalysis()
     def run(self):
         self.strategy.initialize()
-        for market_data in self.strategy.market_datas:
-            self.strategy.handle_data(market_data)
+        print ('in emulator run ')
+        #for i in range(len(self.strategy.market_datas.index)):
+        for i in range(100):
+            self.strategy.handle_data(self.strategy.market_datas.iloc[i])
         self.analysis_class.get_analysis_result()

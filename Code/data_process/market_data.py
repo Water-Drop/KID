@@ -14,8 +14,7 @@ class MarketData(object):
     classdocs
     '''
 
-
-    def __init__(self, data_type):
+    def __init__(self, data_type, attribute_name_array, from_timestamp, to_timestamp):
         '''
         Constructor
         '''
@@ -24,9 +23,9 @@ class MarketData(object):
         elif (data_type == 'Minute'):
             self.data_class = MinuteData('')
         elif (data_type == 'Tick'):
-            self.data_class = TickData('')
+            self.data_class = TickData(attribute_name_array, from_timestamp, to_timestamp)
         else:
             print 'unhandled data type'
             
     def get_data(self):
-        self.data_class.get_data()
+        return self.data_class.get_data()

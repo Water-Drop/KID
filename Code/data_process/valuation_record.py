@@ -16,4 +16,4 @@ class ValuationRecord(object):
         Constructor
         '''
     def get_valuation_record(self):
-        print ''
+        print 'get_valuation_record'

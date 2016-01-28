@@ -38,4 +38,8 @@ class TickData(object):
     def read_csv_file(self, filename):
         upper_dir_path = os.path.abspath(os.path.join(os.path.abspath(os.path.dirname(sys.argv[0])), '..'))
         filepath = upper_dir_path + os.sep + 'data_files' + os.sep + filename + '.csv'
-        return pd.read_csv(filepath)
+        file_data = pd.read_csv(filepath)
+        file_data.drop(len(file_data.index) - 1)
+        file_data = file_data.drop(0)
+        file_data = file_data.drop(1)
+        return file_data

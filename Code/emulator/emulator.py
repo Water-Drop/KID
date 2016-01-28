@@ -18,13 +18,15 @@ class Emulator(object):
         Constructor
         '''
         self.strategy = strategy
-        self.analysis_class = TradingAnalysis()
+        
     def run(self):
         self.strategy.initialize()
         print ('in emulator run ')
         print self.strategy.market_datas.count()
+        print self.strategy.market_datas.head()
         #for i in range(len(self.strategy.market_datas.index)):
-        for i in range(0,1000):
+        for i in range(0,100000):
             self.strategy.handle_data(self.strategy.market_datas.iloc[i])
-        self.analysis_class.add_trading_record(self.strategy.order_process_class.trading_record_class.get_trading_record())
-        self.analysis_class.get_analysis_result()
+        analysis_class = TradingAnalysis(self.strategy.initial_capital)
+        analysis_class.add_trading_record(self.strategy.order_process_class.trading_record_class.get_trading_record())
+        analysis_class.get_analysis_result()

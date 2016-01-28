@@ -24,6 +24,7 @@ class Emulator(object):
         print ('in emulator run ')
         print self.strategy.market_datas.count()
         #for i in range(len(self.strategy.market_datas.index)):
-        for i in range(300,400):
+        for i in range(0,1000):
             self.strategy.handle_data(self.strategy.market_datas.iloc[i])
+        self.analysis_class.add_trading_record(self.strategy.order_process_class.trading_record_class.get_trading_record())
         self.analysis_class.get_analysis_result()

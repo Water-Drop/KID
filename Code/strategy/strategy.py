@@ -59,7 +59,6 @@ class Strategy(object):
     
     def order(self, future_id, is_buy, is_open, order_type, price, amount):
         self.order_process_class.process_order(future_id, is_buy, is_open, order_type, price, amount)
-        print 'order'
     
     def merge_market_data(self, data_name, attribute_name_array, market_data):
         for attribute_name in attribute_name_array:

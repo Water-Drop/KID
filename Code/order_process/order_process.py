@@ -20,6 +20,6 @@ class OrderProcess(object):
         
     def process_order(self, future_id, is_buy, is_open, order_type, price, amount):
         self.trading_record_class.add_trading_record('', future_id, '', amount, price, is_buy, is_open)
-        print ''
+        
         
         

@@ -5,7 +5,7 @@ Created on 2016年1月24日
 @author: Water
 '''
 
-class DailyPosition(object):
+class Position(object):
     '''
     classdocs
     '''
@@ -16,5 +16,5 @@ class DailyPosition(object):
         Constructor
         '''
     
-    def get_daily_position(self):
+    def get_position(self):
         print 'get daily position'    

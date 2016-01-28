@@ -31,6 +31,7 @@ class TradingRecord(object):
     def get_trading_record(self):
         print'get trading record'
         print self.trading_record
+        print self.trading_record.describe()
         return self.trading_record
     
     def write_to_csv(self):

@@ -22,7 +22,8 @@ class Emulator(object):
     def run(self):
         self.strategy.initialize()
         print ('in emulator run ')
+        print self.strategy.market_datas.count()
         #for i in range(len(self.strategy.market_datas.index)):
-        for i in range(100):
+        for i in range(300,400):
             self.strategy.handle_data(self.strategy.market_datas.iloc[i])
         self.analysis_class.get_analysis_result()

@@ -20,8 +20,10 @@ class TrendStrategy(strategy.Strategy):
         from_time = time.strptime("2014-01-06 09:15:00", "%Y-%m-%d %H:%M:%S")
         to_time = time.strptime("2014-01-08 15:15:00", "%Y-%m-%d %H:%M:%S")
         self.add_data('Tick', 'test_data', ['price','amount', 'bid1', 'ask1'], time.mktime(from_time), time.mktime(to_time))
+        self.add_transform('MovingAverage',['test_data'], ['price', 'bid1', 'ask1'], 200)
     def handle_data(self, data):
-        print data['test_data.price']
+        
+        print data['test_data.price'],data['test_data.bid1'],data['test_data.price.moving_average200'],data['test_data.bid1.moving_average200']
 
 t = TrendStrategy('')
 e = emulator.Emulator(t)

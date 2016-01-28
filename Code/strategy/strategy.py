@@ -8,6 +8,9 @@ Created on 2016年1月19日
 from data_process.market_data import MarketData
 from order_process.order_process import OrderProcess
 import pandas as pd
+from transform.moving_average import MovingAverage
+import copy
+
 
 class Strategy(object):
     '''
@@ -32,7 +35,17 @@ class Strategy(object):
     def set_initial_capital(self, capital):
         self.initial_capital = capital
          
-    def add_transform(self, transform_type, data_name_array, attribute_name_array, window_length): 
+    def add_transform(self, transform_type, data_name_array, attribute_name_array, window_length):
+        if (transform_type == 'MovingAverage'):
+            for data_name in data_name_array:
+                tmp_attribute_name_array = copy.deepcopy(attribute_name_array)
+                for i in range(0, len(tmp_attribute_name_array)):
+                    tmp_attribute_name_array[i] = data_name + '.' + tmp_attribute_name_array[i]
+                print self.market_datas.count()
+                moving_average_class = MovingAverage(window_length, self.market_datas[tmp_attribute_name_array])
+                self.merge_transform_data(moving_average_class.get_transform_data())
+        else:
+            print ('unhandled transformed type')
         print ''
     
     def add_data(self, data_type, data_name, attribute_name_array, from_timestamp, to_timestamp):
@@ -49,7 +62,10 @@ class Strategy(object):
         print 'order'
     
     def merge_market_data(self, data_name, attribute_name_array, market_data):
-        renamed_market_data = market_data
         for attribute_name in attribute_name_array:
-            renamed_market_data = renamed_market_data.rename(columns = {attribute_name: data_name + '.' + attribute_name})
-        self.market_datas = pd.concat([self.market_datas, renamed_market_data], axis=1)
+            market_data = market_data.rename(columns = {attribute_name: data_name + '.' + attribute_name})
+        self.market_datas = pd.concat([self.market_datas, market_data], axis=1)
+    
+    def merge_transform_data(self, transformed_data):
+        self.market_datas = pd.concat([self.market_datas, transformed_data], axis=1)
+        
